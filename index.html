@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Student Management Dashboard</title>
+<meta charset="UTF-8">
+<title>Student Dashboard</title>
+
 <style>
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 30px;
-  background-color: #fff9e6;
+  background: #fff9e6;
   color: #5a4d2f;
   min-height: 100vh;
 }
@@ -15,106 +17,87 @@ body {
 .container {
   max-width: 900px;
   margin: auto;
-  background: #ffffff;
+  background: #fff;
   padding: 30px 40px;
   border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(204, 170, 37, 0.25);
+  box-shadow: 0 10px 25px rgba(204,170,37,.25);
   border: 1px solid #e4d58b;
 }
 
-h1 {
+h2 {
   text-align: center;
   color: #997d0e;
   font-weight: 900;
-  font-size: 2.8rem;
-  margin-bottom: 35px;
-  text-shadow: none;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
 }
 
-form input,
-form select {
+input,
+select {
   padding: 14px 18px;
-  flex: 1 1 180px;
+  margin: 8px 5px;
   border: 2px solid #e4d58b;
   border-radius: 14px;
   background: #fff9d7;
   color: #5a4d2f;
-  font-size: 16.5px;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  font-size: 16px;
+  transition: .3s;
 }
 
-form input::placeholder {
+input::placeholder {
   color: #b3a35a;
 }
 
-form select option {
-  background: #fff9d7;
-  color: #5a4d2f;
-}
-
-form input:focus,
-form select:focus {
+input:focus,
+select:focus {
   outline: none;
   border-color: #d4bc0a;
   background: #ece587;
 }
 
-/* Increase space for email input */
-form input#email {
-  flex: 2 1 280px;
+#email {
+  width: 280px;
 }
 
 button {
-  padding: 15px 32px;
+  padding: 14px 28px;
   background: #d4bc0a;
   color: #fff;
   border: none;
   border-radius: 14px;
-  font-weight: 800;
-  font-size: 17px;
+  font-weight: 700;
+  font-size: 16px;
   cursor: pointer;
-  flex: 0 0 auto;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 8px 5px;
+  transition: .3s;
 }
 
 button:hover {
   background: #a68b06;
-  color: #fff9e6;
+}
+
+.cancel {
+  background: #888;
+}
+
+.cancel:hover {
+  background: #555;
 }
 
 #search {
   width: 100%;
-  padding: 14px 18px;
-  border-radius: 14px;
-  border: 2px solid #e4d58b;
-  background: #fff9d7;
-  color: #5a4d2f;
-  font-size: 17px;
-  margin-top: 18px;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-#search::placeholder {
-  color: #b3a35a;
-}
-
-#search:focus {
-  border-color: #d4bc0a;
-  outline: none;
-  background: #ece587;
+  margin-top: 15px;
 }
 
 table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 16px;
-  margin-top: 28px;
-  color: #5a4d2f;
+  border-spacing: 0 14px;
+  margin-top: 30px;
 }
 
-th,
-td {
-  padding: 18px 24px;
+th, td {
+  padding: 16px 20px;
   text-align: left;
 }
 
@@ -122,188 +105,130 @@ th {
   background: #d4bc0a;
   color: #fff;
   font-weight: 700;
-  font-size: 1.1rem;
-  border-radius: 16px 16px 0 0;
-  text-shadow: none;
+  border-radius: 14px 14px 0 0;
 }
 
-/* Make Email column wider */
-table th:nth-child(3),
-table td:nth-child(3) {
+table th:nth-child(2),
+table td:nth-child(2) {
   width: 280px;
 }
 
 tbody tr {
   background: #fff9d7;
-  box-shadow: 0 3px 14px rgba(212, 188, 10, 0.2);
-  border-radius: 18px;
-  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 14px rgba(212,188,10,.2);
+  border-radius: 16px;
+  transition: .3s;
 }
 
 tbody tr:hover {
   background: #ece587;
-  box-shadow: 0 4px 20px rgba(212, 188, 10, 0.4);
+  box-shadow: 0 4px 20px rgba(212,188,10,.4);
 }
 
 tbody tr td:first-child {
-  border-radius: 18px 0 0 18px;
+  border-radius: 16px 0 0 16px;
 }
 
 tbody tr td:last-child {
-  border-radius: 0 18px 18px 0;
+  border-radius: 0 16px 16px 0;
 }
 
-.action-btn {
-  margin: 0 7px;
-  padding: 9px 16px;
-  font-size: 15px;
-  border-radius: 16px;
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  color: #fff;
-  background: #d4bc0a;
-  transition: background-color 0.3s ease, color 0.3s ease;
+.actions button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border-radius: 12px;
+  margin-right: 6px;
 }
 
-.action-btn:hover {
-  background: #a68b06;
-  color: #fff9e6;
+.actions button:first-child {
+  background: #28a745;
 }
 
-.delete {
-  background: #f5af38;
-  color: #fff;
+.actions button:last-child {
+  background: #dc3545;
 }
 
-.delete:hover {
-  background: #c47e06;
-  color: #fff;
+.search-filter {
+  margin-top: 10px;
 }
 </style>
-
-
 </head>
+
 <body>
-
 <div class="container">
-  <h1>Student Management Dashboard</h1>
+<h2>Student Management</h2>
 
-  <form id="studentForm">
-    <input type="hidden" id="studentId">
-    <input type="text" id="registerNumber" placeholder="Register Number" required>
-    <input type="text" id="name" placeholder="Student Name" required>
-    <input type="email" id="email" placeholder="Email" required>
+<input id="name" placeholder="Name">
+<input id="email" type="email" placeholder="Email">
+<input id="age" type="number" placeholder="Age">
+<select id="course">
+<option value="">Select course</option>
+<option>BCA</option><option>BBA</option>
+<option>BSC</option><option>BCOM</option>
+<option>MCOM</option><option>MCA</option>
+</select><br>
 
-    <!-- Course Selection Dropdown -->
-    <select id="course" required>
-      <option value="">Select Course</option>
-      <option value="BCA">BCA</option>
-      <option value="BBA">BBA</option>
-      <option value="BTech">BTech</option>
-      <option value="B COM">B COM</option>
-      <option value="BSC">BSC</option>
-      <option value="BA">BA</option>
-      <option value="MCA">MCA</option>
-      <option value="MBA">MBA</option>
-    </select>
+<button id="mainBtn">Add</button>
+<button id="cancelBtn" class="cancel" style="display:none">Cancel</button>
 
-    <button type="submit">Save</button>
-  </form>
+<div class="search-filter">
+<input id="search" placeholder="Search...">
+</div>
 
-  <input type="text" id="search" placeholder="Search students...">
-
-  <table>
-    <thead>
-      <tr>
-        <th>Register Number</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Course</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="studentTable"></tbody>
-  </table>
+<table>
+<thead>
+<tr>
+<th>Name</th><th>Email</th><th>Age</th><th>Course</th><th>Actions</th>
+</tr>
+</thead>
+<tbody id="list"></tbody>
+</table>
 </div>
 
 <script>
-  let students = JSON.parse(localStorage.getItem("students")) || [];
+let students=JSON.parse(localStorage.getItem("students"))||[],edit=-1,
+nameInput=document.getElementById("name"),
+emailInput=document.getElementById("email"),
+ageInput=document.getElementById("age"),
+courseInput=document.getElementById("course"),
+searchInput=document.getElementById("search"),
+list=document.getElementById("list"),
+mainBtn=document.getElementById("mainBtn"),
+cancelBtn=document.getElementById("cancelBtn");
 
-  const form = document.getElementById("studentForm");
-  const table = document.getElementById("studentTable");
-  const searchInput = document.getElementById("search");
+const save=()=>localStorage.setItem("students",JSON.stringify(students));
 
-  function saveToLocalStorage() {
-    localStorage.setItem("students", JSON.stringify(students));
-  }
+function render(){
+let s=searchInput.value.toLowerCase();
+list.innerHTML=students.map((x,i)=>
+(x.n+x.e+x.c).toLowerCase().includes(s)?
+`<tr>
+<td>${x.n}</td><td>${x.e}</td><td>${x.a}</td><td>${x.c}</td>
+<td class="actions">
+<button onclick="editStudent(${i})">Edit</button>
+<button onclick="deleteStudent(${i})">Delete</button>
+</td></tr>`:"").join("");
+}
 
-  function renderStudents(data = students) {
-    table.innerHTML = "";
-    data.forEach((student, index) => {
-      table.innerHTML += `
-        <tr>
-          <td>${student.registerNumber}</td>
-          <td>${student.name}</td>
-          <td>${student.email}</td>
-          <td>${student.course}</td>
-          <td>
-            <button class="action-btn" onclick="editStudent(${index})" style="background:#00fae0; color:#000;">Edit</button>
-            <button class="action-btn delete" onclick="deleteStudent(${index})">Delete</button>
-          </td>
-        </tr>
-      `;
-    });
-  }
+function resetForm(){nameInput.value=emailInput.value=ageInput.value=courseInput.value="";edit=-1;mainBtn.innerText="Add";cancelBtn.style.display="none";}
 
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
+mainBtn.onclick=function(){
+let n=nameInput.value.trim(),e=emailInput.value.trim(),a=ageInput.value.trim(),c=courseInput.value;
+if(!n||!e||!a||!c)return;
+edit>-1?students[edit]={n,e,a,c}:students.push({n,e,a,c});
+save();resetForm();render();
+};
 
-    const id = document.getElementById("studentId").value;
-    const registerNumber = document.getElementById("registerNumber").value.trim();
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const course = document.getElementById("course").value;
+cancelBtn.onclick=resetForm;
 
-    if (id === "") {
-      students.push({ registerNumber, name, email, course });
-    } else {
-      students[id] = { registerNumber, name, email, course };
-    }
+function editStudent(i){
+let s=students[i];
+nameInput.value=s.n;emailInput.value=s.e;ageInput.value=s.a;courseInput.value=s.c;
+edit=i;mainBtn.innerText="Update";cancelBtn.style.display="inline-block";
+}
 
-    saveToLocalStorage();
-    renderStudents();
-    form.reset();
-    document.getElementById("studentId").value = "";
-  });
-
-  function editStudent(index) {
-    document.getElementById("studentId").value = index;
-    document.getElementById("registerNumber").value = students[index].registerNumber;
-    document.getElementById("name").value = students[index].name;
-    document.getElementById("email").value = students[index].email;
-    document.getElementById("course").value = students[index].course;
-  }
-
-  function deleteStudent(index) {
-    students.splice(index, 1);
-    saveToLocalStorage();
-    renderStudents();
-  }
-
-  searchInput.addEventListener("input", function() {
-    const value = this.value.toLowerCase();
-    const filtered = students.filter(s =>
-      s.registerNumber.toLowerCase().includes(value) ||
-      s.name.toLowerCase().includes(value) ||
-      s.email.toLowerCase().includes(value) ||
-      s.course.toLowerCase().includes(value)
-    );
-    renderStudents(filtered);
-  });
-
-  renderStudents();
+function deleteStudent(i){students.splice(i,1);save();render();}
+searchInput.oninput=render;render();
 </script>
-
 </body>
 </html>
